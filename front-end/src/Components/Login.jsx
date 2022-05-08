@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Button, Col, Modal, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 export default function Login(props) {
   const {setDataOfUser, setAuth} = props
@@ -11,16 +12,20 @@ export default function Login(props) {
   const [email, setEmail] = useState("")
   const [password, setPassward] = useState("")
   const [error, setError] = useState(false)
+  axios.defaults.withCredentials = true
+
 
     
   
   let navigete = useNavigate()
+  
   async function loginSubmit(){
+    
 
     try{
-    const response = await axios.post("/auth", { email, password });
+    const response = await axios.post('http://localhost:3001/auth', { email, password });
   
-    setDataOfUser({...response.data[0]})
+    setDataOfUser({...response.data.user[0]})
     setEmail("")
     setPassward("")
     setAuth(true)
@@ -30,11 +35,32 @@ export default function Login(props) {
       }
 
     catch(err){
-      setError(err.response.data);
-     
+      if(err.response.data[0].message)
+{      alert(err.response.data[0].message)
+}
+else
+{alert(err.response.data);
+}     
     }
   }
+  const cookies = new Cookies();
 
+  const token = cookies.get("access-token")
+  useEffect(()=>{
+    if(token){
+    axios.get(`http://localhost:3001/login/${token}`).then(res=>{
+    if(res)  {
+    setDataOfUser({...res.data.result[0]})
+    setAuth({...res.data.auth})
+    navigete("/login")
+  
+  }
+    
+    else{
+      setAuth(false)
+    }
+  })}
+  },[])
 
 
 
@@ -62,7 +88,7 @@ export default function Login(props) {
             </Row>
           </Form>
           {error?
-          <Alert variant="danger">{error}</Alert>:""}
+          <Alert className="p-2" variant="danger">{error}</Alert>:""}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

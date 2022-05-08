@@ -1,6 +1,68 @@
-html{
-	margin: 6%;
-}
+
 .buttons{
-	justify-content: space-evenly;
+	
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+    height: 15%;
+    align-content: space-around;
+  
 }
+.cards{
+	display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  justify-items: center;
+  
+  margin-bottom: 2%;
+}
+.img{
+	height: 30%;
+}
+
+
+.text-secondary{
+position: absolute !important;
+}
+.btnOfFoster{
+  margin-right:5px ;
+}
+
+.bodyCard{
+  background: rgba( 255, 255, 255, 0.45 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 10px );
+  -webkit-backdrop-filter: blur( 10px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  margin: 5%;
+}
+body{
+  background-image: url("https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1805164.jpg&fm=jpg") ;
+  background-position: center;
+
+  background-size: 100% ;
+}
+
+.card-body{
+  justify-content: space-around !important;
+}
+
+
+h1 {
+  color:#A80C1E;
+  display:block;
+  font-size:85px;
+  font-weight:normal;
+  letter-spacing:-3.5px;
+  line-height:1em;
+  }
+
+  button{
+    margin-top: 5px !important;
+    height: 40px;
+  }
+
+ 

@@ -9,9 +9,9 @@ export default function LogOut({setAuth, setDataOfUser, auth}) {
 
   
   return (
-    <>
-      <h1 className="text-center mb-5"> Adoption App</h1>
-      <div className="card text-center">
+    <div className="logout">
+      <h1 className="text-center"> Adoption App</h1>
+      <div className="text-center">
         <div className="card-body">
           <h5 className="card-title">Sign Up / Login now!</h5>
           <p className="card-text ">
@@ -26,6 +26,6 @@ export default function LogOut({setAuth, setDataOfUser, auth}) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -5,9 +5,10 @@ export default function HomeLogin({dataOfUser, setDataOfUser}){
     
     return(
         <>
-        <div>
+        <div className='text-center'>
             <h1>{`Welcome to pets adoption ${dataOfUser.firstname} ${dataOfUser.lastName}`}</h1> <br></br>
-            <h3> Start adipting now! </h3>
+            <h3> Start adopting now! </h3>
+         
         </div>
         </>
     )
