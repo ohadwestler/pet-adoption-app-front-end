@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import axios from "axios";
@@ -6,43 +6,22 @@ import { Row, Col } from "react-bootstrap";
 import { Card, ListGroupItem, Alert, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export default function Search({ setEditPet, auth, dataOfUser }) {
+export default function Search({ setClickedPet }) {
   const [type, setType] = useState("");
   const [name, setName] = useState("");
   const [weight, setweight] = useState("");
   const [height, setheight] = useState("");
   const [status, setStatus] = useState("");
   const [pets, setpets] = useState([]);
-  const [savedPets, setSavedPets] = useState([])
-  const [render,setRender] = useState([])
   const [adv, setAdv] = useState("");
+
   let navigate = useNavigate();
+
   function showMore(pet) {
-    setEditPet(pet);
+    setClickedPet(pet);
     navigate("/showmore");
   }
 
-  useEffect(() => {
-    if(auth)
-  {axios.get(`http://localhost:3001/pet/user`).then((res) => {
-      if(res.data.resultOfSaved)
-     {  console.log(res.data.resultOfSaved)
-        setSavedPets([...res.data.resultOfSaved])}
-
-    }).catch(err=>{if(auth)alert(err.response.data.message)})
-  }}, [render]);
-
-  async function unSaveIt(pet) {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/pet/${pet.petsId}/save`
-      )
-      setRender(response)
-      console.log(response)
-    } catch (e) {
-      alert(e.response.data.message)
-    }
-  }
   const handleSearch = () => {
     console.log()
     axios
@@ -59,32 +38,8 @@ export default function Search({ setEditPet, auth, dataOfUser }) {
       });
   };
 
-  function save(pet) {
-    axios
-      .post(`http://localhost:3001/pet/${pet.petsId}/save`)
-      .then((res) =>setRender(res)
-      ).catch(err=>alert(err.response.data.message));
-  }
-  function adopt(pet) {
-    axios
-      .post(`http://localhost:3001/pet/${pet.petsId}/adopt`)
-      .then((res) => setpets([...res.data]))
-      .catch(err=>alert(err.response.data.message))
-  }
-  function foster(pet) {
-    axios
-      .post(`http://localhost:3001/pet/${pet.petsId}/foster`)
-      .then((res) => setpets([...res.data]))
-      .catch(err=>alert(err.response.data.message))
 
-  }
-  function makeAvailable(pet) {
-    axios
-      .post(`http://localhost:3001/pet/${pet.petsId}/return`)
-      .then((res) => setpets([...res.data]))
-      .catch(err=>alert(err.response.data.message))
 
-  }
 
   return (
     <div className="m-5">
@@ -187,18 +142,11 @@ export default function Search({ setEditPet, auth, dataOfUser }) {
                     src={pet.uploadResult}
                   />
                   <Card.Body>
-                    <Card.Title>Name:{pet.namePets}</Card.Title>
-                    <Card.Text>{pet.biography}</Card.Text>
+                    <Card.Title>Name: {pet.name}</Card.Title>
                   </Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroupItem>
                       <strong>Type:</strong> {pet.type}
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <strong>Dietary Restriction:</strong> {pet.dietary}
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <strong>Breed:</strong> {pet.breed}
                     </ListGroupItem>
                     <ListGroupItem>
                       <strong>Height:</strong> {pet.height}
@@ -207,60 +155,10 @@ export default function Search({ setEditPet, auth, dataOfUser }) {
                       <strong>Wheight:</strong> {pet.weight}
                     </ListGroupItem>
                     <ListGroupItem>
-                      <strong>Hypoallergenic?:</strong> {pet.hypo}
-                    </ListGroupItem>
-                    <ListGroupItem>
-                      <strong>Color:</strong> {pet.color}
-                    </ListGroupItem>
-                    <ListGroupItem>
                       <strong>Adoption Status:</strong> {pet.adoptionStatus}
                     </ListGroupItem>
                   </ListGroup>
                   <Card.Body className="buttons">
-                    {auth ? (
-                      <>
-                        {savedPets.find((val)=> val.petsId == pet.petsId) != null ? (
-                <Button onClick={() => unSaveIt(pet)}>Unsave oet</Button>
-              ) : (
-                <Button onClick={() => save(pet)}>Save pet</Button>
-              )}
-
-
-                        {pet.adoptionStatus === "Available" ? (
-                          <>
-                            <Button onClick={() => foster(pet)}>Foster</Button>
-                            <Button onClick={() => adopt(pet)}>Adopt</Button>
-                          </>
-                        ) : (
-                          ""
-                        )}
-
-                        {pet.adoptionStatus === "Adopted" &&
-                        dataOfUser.email === pet.owner ? (
-                          <>
-                            <Button onClick={() => makeAvailable(pet)}>
-                              return pet
-                            </Button>
-                          </>
-                        ) : (
-                          ""
-                        )}
-
-                        {pet.adoptionStatus === "Fostered" &&
-                        dataOfUser.email === pet.owner ? (
-                          <>
-                            <Button onClick={() => makeAvailable(pet)}>
-                              return pet
-                            </Button>
-                            <Button onClick={() => adopt(pet)}>Adopt</Button>
-                          </>
-                        ) : (
-                          ""
-                        )}
-                      </>
-                    ) : (
-                      ""
-                    )}
                     <Button onClick={() => showMore(pet)}>Show More</Button>
                   </Card.Body>
                 </Card>

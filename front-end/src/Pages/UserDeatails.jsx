@@ -2,9 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Table, Alert } from "react-bootstrap";
 import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
-export default function UserDeatails({ userClicked, dataOfUser }) {
-  console.log(userClicked);
-    const [admin, setAdmin] = useState(dataOfUser.email)
+
+export default function UserDeatails({ userClicked }) {
   const [email,setEmail] = useState(userClicked.email)
   const [userPets, setUserPets] = useState([])
   useEffect(()=>{
@@ -50,7 +49,7 @@ axios.get(`http://localhost:3001/pet/user/${email}/full`).then(res=>setUserPets(
           <Alert.Heading>The user currently not owns any pets!</Alert.Heading>
         </Alert>
       ) : (<>
-        <h1>{dataOfUser.firstname} owns:</h1>
+        <h1>{userClicked.firstname} owns:</h1>
         {userPets.map((pet, index) => {
           return (
             <div className="cards">

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
-import MyPetsCards from "../Components/MyPetsCards";
+import MyPetsCards from "../Components/MyPetsCard";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-function MyPetsPage({ auth, dataOfUser }) {
+function MyPetsPage({ auth, dataOfUser, setClickedPet }) {
     const [ownerPets, setOwnerPets] = useState([]);
-    const [fosteredPets, setFosteredPets] = useState([]);    
+    const [fosteredPets, setFosteredPets] = useState([]);
+    
     const [render, setRender] = useState([])
     const [savedPets, setSavedPets] = useState([]);
 
@@ -37,6 +37,7 @@ function MyPetsPage({ auth, dataOfUser }) {
                 key={index}
                 dataOfUser={dataOfUser}
                 setRender ={setRender}
+                setClickedPet = {setClickedPet}
 
               />
             ))}
@@ -65,6 +66,8 @@ function MyPetsPage({ auth, dataOfUser }) {
                     dataOfUser={dataOfUser}
                     auth={auth}
                     setRender ={setRender}
+                    setClickedPet = {setClickedPet}
+
                     saved={savedPets.find((val)=> val.petsId == pet.petsId) != null}
                   />
                 ))}
@@ -85,6 +88,7 @@ function MyPetsPage({ auth, dataOfUser }) {
                     key={index}
                     auth={auth}
                     dataOfUser={dataOfUser}
+                    setClickedPet = {setClickedPet}
                     setRender ={setRender}
                   />
                 ))}

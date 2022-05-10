@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "../Components/SignUp";
 import Login from "../Components/Login";
-import { Navigate, useNavigate } from "react-router-dom";
 
-export default function LogOut({setAuth, setDataOfUser, auth}) {
+export default function LogOut({setAuth, setDataOfUser}) {
 
 
   

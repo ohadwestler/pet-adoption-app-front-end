@@ -1,13 +1,11 @@
-import React, { Component, useState } from 'react';
-import { FormGroup, Form, Col, InputGroup, Row, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, Col, InputGroup, Row, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { TextareaHTMLAttributes } from 'react';
 import { Alert } from 'react-bootstrap';
 
 export default function Settings({dataOfUser, setDataOfUser}){
     
 const [validated, setValidated] = useState(false);
-  const[loginEmail, setLoginEmail] = useState(dataOfUser.email)
   const [email, setEmail] = useState(dataOfUser.email)
   const [password, setPassward] = useState("")
   const [firstname, setFirstname] = useState(dataOfUser.firstname)
@@ -30,7 +28,6 @@ async function handleSubmit (event) {
     try{
       const response = await axios.put(`http://localhost:3001/changes`, { email, password, firstname, lastName,  phone, confirmPasswad, bio });
       setDataOfUser({...response.data})
-      setLoginEmail(response.data.email)
       console.log(response);
       setError("")
       alert(dataOfUser.message|| "updated!")
@@ -134,7 +131,7 @@ async function handleSubmit (event) {
         <Button type="submit">Save changes</Button>
       </Form>
 {error?
-          <Alert variant="danger">{error}</Alert>:""}
+          <Alert className='text-center' variant="danger">{error}</Alert>:""}
         </>
     )
 }

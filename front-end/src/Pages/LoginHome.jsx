@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import Navbar from '../Components/NavBar';
-import Settings from './Settings'
-export default function HomeLogin({dataOfUser, setDataOfUser}){
+import React from 'react';
+
+
+export default function HomeLogin({dataOfUser}){
     
     return(
         <>

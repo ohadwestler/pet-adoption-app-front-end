@@ -125,7 +125,7 @@ export default function SignUp({ setDataOfUser, setAuth }) {
               />
             </Form.Group>
           </Form>
-          {error ? <Alert variant="danger">{error}</Alert> : ""}
+          {error ? <Alert className="text-center" variant="danger">{error}</Alert> : ""}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

@@ -1,11 +1,8 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React from "react";
 import {
   Navbar,
   Nav,
-  
-  Form,
-  FormControl,
   Button,
   Container,
 } from "react-bootstrap";

@@ -1,22 +1,21 @@
 import axios from 'axios';
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Card, Button } from 'react-bootstrap';
-import { nanoid } from 'nanoid'
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Pets({loginEmail, setEditPet}){
+export default function Pets({setClickedPet}){
     const [pets, setPets] = useState(false)
     let navigate = useNavigate()
 
     function updatePet(pet){
       navigate("/updatepet")
-      setEditPet(pet)
+      setClickedPet(pet)
   }
 
   function showMore(pet){
-    setEditPet(pet)
+    setClickedPet(pet)
     navigate("/showmore")
   }
     useEffect(()=>{

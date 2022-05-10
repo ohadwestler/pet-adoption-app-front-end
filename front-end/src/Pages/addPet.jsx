@@ -1,11 +1,11 @@
-import React, { Component, useState, useRef } from "react";
+import React, { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { FormGroup, Form, Col, InputGroup, Row, Button } from "react-bootstrap";
+import {  Form, Col, Row, Button } from "react-bootstrap";
 import axios from "axios";
 import { Alert } from "react-bootstrap";
 
-export default function AddPet({ dataOfUser }) {
+export default function AddPet() {
   let navigate = useNavigate()
   const [validated, setValidated] = useState(false);
   const [type, setType] = useState("");
@@ -51,7 +51,7 @@ export default function AddPet({ dataOfUser }) {
       const response = await axios.post(`http://localhost:3001/pets`, formData);
       console.log({ ...response.data });
       setError("");
-      alert(dataOfUser.message || "Upload is done!");
+      alert(response.data.message || "Upload is done!");
       setName("");
       setType("");
       setColor("");

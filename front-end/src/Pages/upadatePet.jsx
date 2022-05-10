@@ -1,24 +1,24 @@
-import React, { Component, useState, useRef } from "react";
+import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { FormGroup, Form, Col, InputGroup, Row, Button } from "react-bootstrap";
+import { FormGroup, Form, Col, Row, Button } from "react-bootstrap";
 import axios from "axios";
 import { Alert, Spinner } from "react-bootstrap";
 
-export default function AddPet({ editPet }) {
+export default function AddPet({ clickedPet }) {
   let navigate = useNavigate();
-  const [id, setId] = useState(editPet.petsId);
+  const [id, setId] = useState(clickedPet.petsId);
   const [validated, setValidated] = useState(false);
-  const [type, setType] = useState(editPet.type);
-  const [color, setColor] = useState(editPet.color);
-  const [diet, setDiet] = useState(editPet.dietary);
-  const [weight, setweight] = useState(editPet.weight);
-  const [name, setName] = useState(editPet.name);
-  const [height, setheight] = useState(editPet.height);
-  const [status, setStatus] = useState(editPet.adoptionStatus);
-  const [bread, setBread] = useState(editPet.breed);
-  const [elergy, setElergy] = useState(editPet.hypo);
-  const [bio, setBio] = useState(editPet.biography);
-  const [image, setImage] = useState(editPet.uploadResult);
+  const [type, setType] = useState(clickedPet.type);
+  const [color, setColor] = useState(clickedPet.color);
+  const [diet, setDiet] = useState(clickedPet.dietary);
+  const [weight, setweight] = useState(clickedPet.weight);
+  const [name, setName] = useState(clickedPet.name);
+  const [height, setheight] = useState(clickedPet.height);
+  const [status, setStatus] = useState(clickedPet.adoptionStatus);
+  const [bread, setBread] = useState(clickedPet.breed);
+  const [elergy, setElergy] = useState(clickedPet.hypo);
+  const [bio, setBio] = useState(clickedPet.biography);
+  const [image, setImage] = useState(clickedPet.uploadResult);
   const [error, setError] = useState(false);
   const [spinner, setSpinner] = useState("none");
 
@@ -78,6 +78,12 @@ export default function AddPet({ editPet }) {
       } else {
         setError(err.response.data.message);
       }
+    }
+  }
+  function deletePet(){
+    if(window.confirm("Are you sure you want to delete?")){
+      axios.delete(`http://localhost:3001/deletepet/${id}`).then(navigate("/pets"))
+
     }
   }
 
@@ -192,7 +198,7 @@ export default function AddPet({ editPet }) {
               required
               onChange={(e) => setImage(e.target.files[0])}
             />
-            <body className="mb-3 overflow-hidden">{editPet.uploadResult}</body>
+            <div className="mb-3 overflow-hidden">{clickedPet.uploadResult}</div>
           </Form.Group>
           <Form.Group as={Col} custom md="4" controlId="validationCustom0711">
             <Form.Label>Hypoallergenic</Form.Label>
@@ -248,7 +254,10 @@ export default function AddPet({ editPet }) {
             <Form.Control.Feedback></Form.Control.Feedback>
           </Form.Group>
         </Row>
+        <div className="d-flex justify-content-around">
         <Button type="submit">Update pet</Button>
+        <Button type="button" onClick={()=>deletePet()}>Delete pet</Button>
+        </div>
       </Form>
       {error ? <Alert className="text-center" variant="danger">{error}</Alert> : ""}
     </div>

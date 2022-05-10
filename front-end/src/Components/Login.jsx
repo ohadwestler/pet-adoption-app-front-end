@@ -11,7 +11,7 @@ export default function Login(props) {
   const handleShow = () => setShow(true);
   const [email, setEmail] = useState("")
   const [password, setPassward] = useState("")
-  const [error, setError] = useState(false)
+
   axios.defaults.withCredentials = true
 
 
@@ -48,7 +48,7 @@ else
   const token = cookies.get("access-token")
   useEffect(()=>{
     if(token){
-    axios.get(`http://localhost:3001/login/${token}`).then(res=>{
+    axios.get(`http://localhost:3001/login`).then(res=>{
     if(res)  {
     setDataOfUser({...res.data.result[0]})
     setAuth({...res.data.auth})
@@ -87,8 +87,6 @@ else
               </Form.Group>
             </Row>
           </Form>
-          {error?
-          <Alert className="p-2" variant="danger">{error}</Alert>:""}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

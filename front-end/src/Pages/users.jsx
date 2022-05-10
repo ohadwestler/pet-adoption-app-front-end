@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-export default function GetUsers({dataOfUser, setUserClicked}) {
+export default function GetUsers({setUserClicked}) {
   let navigatate = useNavigate()
 
   function displayUser(user){
@@ -11,7 +11,6 @@ export default function GetUsers({dataOfUser, setUserClicked}) {
     setUserClicked(user)
 
   }
-    console.log(dataOfUser)
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:3001/users`).then((res) => {

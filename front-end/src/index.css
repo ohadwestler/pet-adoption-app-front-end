@@ -1,11 +1,22 @@
+html { 
+  background: url("https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1805164.jpg&fm=jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
+html,body {
+  height:100%;
+  min-height:100%;
+  max-height:100%;
+}
 .buttons{
 	
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: space-between;
-    height: 15%;
     align-content: space-around;
   
 }
@@ -13,22 +24,17 @@
 	display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
   justify-items: center;
-  
   margin-bottom: 2%;
+  
 }
 .img{
-	height: 30%;
+	height: 250px;
 }
-
-
 .text-secondary{
 position: absolute !important;
 }
-.btnOfFoster{
-  margin-right:5px ;
-}
+
 
 .bodyCard{
   background: rgba( 255, 255, 255, 0.45 );
@@ -40,10 +46,10 @@ position: absolute !important;
   margin: 5%;
 }
 body{
-  background-image: url("https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1805164.jpg&fm=jpg") ;
+  background: url("https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1805164.jpg&fm=jpg") ;
   background-position: center;
-
-  background-size: 100% ;
+  background-size:cover;
+  background-repeat: no-repeat;
 }
 
 .card-body{
@@ -62,7 +68,10 @@ h1 {
 
   button{
     margin-top: 5px !important;
-    height: 40px;
   }
 
+.buttonsOfShowPet{
  
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
