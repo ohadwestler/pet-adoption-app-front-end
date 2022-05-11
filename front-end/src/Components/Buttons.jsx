@@ -143,6 +143,17 @@ export default function Buttons({ pet, dataOfUser, setRender }) {
           ""
         )}
       </>
+      {pet.adoptionStatus === "Fostered" && dataOfUser.email !== pet.owner ? (
+          <>
+            <div className="buttonsOfShowPet d-flex justify-content-around">
+              <Button className="btn btn-success" onClick={() => adoptIt(pet)}>
+                Adopt it
+              </Button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
     </div>
   );
 }

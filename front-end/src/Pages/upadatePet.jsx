@@ -82,7 +82,9 @@ export default function AddPet({ clickedPet }) {
   }
   function deletePet(){
     if(window.confirm("Are you sure you want to delete?")){
-      axios.delete(`http://localhost:3001/deletepet/${id}`).then(navigate("/pets"))
+      axios.delete(`http://localhost:3001/deletepet/${id}`).then(()=>{
+      alert("Deleted from system")
+      navigate("/pets")})
 
     }
   }

@@ -15,8 +15,8 @@ useEffect(()=>{axios.get(`http://localhost:3001/pet/${clickedPet.petsId}`).then(
             <Card style={{ width: "18rem" }}> 
               <Card.Img className="img" variant="top" src={getPet.uploadResult}/>
               <Card.Body>
-                <Card.Title>Name:{getPet.name}</Card.Title>
-                <Card.Text>Bio:{getPet.biography}</Card.Text>
+                <Card.Title>Name: {getPet.name}</Card.Title>
+                <Card.Text>{getPet.biography}</Card.Text>
               </Card.Body>
               <ListGroup className="list-group-flush">
                 <ListGroupItem><strong>Type:</strong> {getPet.type}</ListGroupItem>

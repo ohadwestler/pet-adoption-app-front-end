@@ -34,7 +34,7 @@ pets.map((pet, index)=>
 <Card style={{ width: "18rem" }} key= {index} className = "my-4"> 
               <Card.Img className="img" variant="top" src={pet.uploadResult}/>
               <Card.Body>
-                <Card.Title>Name:{pet.namePets}</Card.Title>
+                <Card.Title>Name: {pet.name}</Card.Title>
                 <Card.Text>{pet.biography}</Card.Text>
               </Card.Body>
               <ListGroup className="list-group-flush">

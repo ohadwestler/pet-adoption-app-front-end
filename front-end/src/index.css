@@ -1,5 +1,5 @@
 html { 
-  background: url("https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1805164.jpg&fm=jpg") no-repeat center center fixed; 
+  background: url("https://res.cloudinary.com/ohad/image/upload/v1652253278/yyqafg8yvnl5yuhybkcp.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -46,7 +46,7 @@ position: absolute !important;
   margin: 5%;
 }
 body{
-  background: url("https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?cs=srgb&dl=pexels-valeria-boltneva-1805164.jpg&fm=jpg") ;
+  background: url("https://res.cloudinary.com/ohad/image/upload/v1652253278/yyqafg8yvnl5yuhybkcp.jpg") ;
   background-position: center;
   background-size:cover;
   background-repeat: no-repeat;
