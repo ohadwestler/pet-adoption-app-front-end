@@ -41,11 +41,11 @@ export const fetchAuth = () => {
 
 export const postSignUp = (
   email,
+  password,
   firstname,
   lastName,
-  password,
-  phone,
-  confirmPasswad
+  confirmPasswad,
+  phone
 ) => {
   return async (dispatch) => {
     dispatch(setLoadingSpinner(true));
@@ -59,7 +59,9 @@ export const postSignUp = (
           phone,
           confirmPasswad,
         });
-        dispatch(setAuth({ ...res.data.user[0] }));
+        const {accessToken} = res.data;
+        localStorage.setItem("access-token", accessToken);
+        dispatch(setAuth({ ...res.data }));
         resolve();
       } catch (err) {
         if (err.response.data[0]) {
@@ -89,6 +91,8 @@ export const postLogin = (email, password) => {
           email,
           password,
         });
+        const {accessToken} = res.data;
+        localStorage.setItem("access-token", accessToken);
         dispatch(setAuth({ ...res.data.user[0] }));
         resolve();
       } catch (err) {
@@ -107,14 +111,9 @@ export const postLogin = (email, password) => {
 export const dissconnectUser = () => {
   return async (dispatch) => {
     dispatch(setLoadingSpinner(true));
-    try {
-      const res = await axios.get(API_ENDPOINT + `/disconnect`);
-      if (res) dispatch(setAuth(null));
-    } catch (error) {
-      console.log(error);
-    } finally {
+    localStorage.removeItem("access-token");
+      dispatch(setAuth(null));
       dispatch(setLoadingSpinner(false));
-    }
   };
 };
 
@@ -124,7 +123,9 @@ export const updateUser = (user) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await axios.put(API_ENDPOINT + "/changes", user);
-        console.log(res.data);
+        const {accessToken} = res.data;
+        localStorage.setItem("access-token", accessToken);
+  
         dispatch(setAuth({ ...user }));
         resolve();
       } catch (err) {

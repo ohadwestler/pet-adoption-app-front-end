@@ -14,25 +14,30 @@ import LogOut from "./Pages/LogOutHome";
 import HomeLogin from "./Pages/LoginHome";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { fetchAuth, stopAuthLoading } from "./Redux/user/actions/useActions";
-import Loading from "./Components/Loading";
+
 function AppRoutes() {
   const { userDetails: user, loading: authLoading } = useSelector(
     (state) => state.auth
   );
   axios.defaults.withCredentials = true;
-  const cookies = new Cookies();
-  const token = cookies.get("access-token");
+  const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token) dispatch(fetchAuth());
-    else dispatch(stopAuthLoading());
+    if (token)
+    {
+      axios.defaults.headers.common['Authorization'] = token
+      dispatch(fetchAuth());
+    } 
+    else {
+      delete axios.defaults.headers.common['Authorization'];
+      dispatch(stopAuthLoading());
+    }
   }, [token, dispatch]);
 
   if (authLoading && !user) {
-    return <Loading />;
+    return;
   } else
     return (
       <>

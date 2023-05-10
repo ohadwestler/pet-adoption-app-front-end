@@ -128,7 +128,6 @@ export const getAllPets = () => {
 
 export const postPet = (pet) => {
   return async (dispatch) => {
-    console.log('postPet');
     dispatch(setLoading(true));
     try {
       await axios.post(API_ENDPOINT + `/pets`, pet);
