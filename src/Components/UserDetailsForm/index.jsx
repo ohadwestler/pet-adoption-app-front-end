@@ -34,6 +34,7 @@ export default function ModalUserDetails({ type }) {
       handleClose();
       navigate("/login");
     } catch (error) {
+      console.log(error);
       setError(error.message);
     }
   };

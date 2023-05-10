@@ -16,14 +16,11 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { fetchAuth, stopAuthLoading } from "./Redux/user/actions/useActions";
-import { Spinner } from "react-bootstrap";
+import Loading from "./Components/Loading";
 function AppRoutes() {
-  const {
-    userDetails: user,
-    loading: authLoading,
-    loadingSpinner,
-  } = useSelector((state) => state.auth);
-  const { loadingPets } = useSelector((state) => state.pets);
+  const { userDetails: user, loading: authLoading } = useSelector(
+    (state) => state.auth
+  );
   axios.defaults.withCredentials = true;
   const cookies = new Cookies();
   const token = cookies.get("access-token");
@@ -32,24 +29,13 @@ function AppRoutes() {
   useEffect(() => {
     if (token) dispatch(fetchAuth());
     else dispatch(stopAuthLoading());
-  }, []);
+  }, [token, dispatch]);
 
   if (authLoading && !user) {
-    return (
-      <div className="d-flex justify-content-center">
-        <Spinner animation="grow" variant="secondary" />
-      </div>
-    );
+    return <Loading />;
   } else
     return (
       <>
-        {loadingSpinner || loadingPets ? (
-          <div className="d-flex justify-content-center ">
-            <Spinner animation="grow" variant="secondary" />
-          </div>
-        ) : (
-          ""
-        )}
         <Routes>
           <Route path="*" element={!user ? <LogOut /> : <HomeLogin />} />
           <Route path="/search" element={<Search />} />

@@ -59,7 +59,7 @@ const reducer = (state = initialState, action) => {
         loadingPets: false,
         savedPets: [
           ...state.savedPets,
-          state.pets.find((pet) => pet.petsId === action.payload),
+          {...state.clickedPet}
         ],
       };
     case "MY_PETS":

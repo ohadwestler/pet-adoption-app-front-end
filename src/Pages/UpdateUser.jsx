@@ -9,9 +9,9 @@ export default function Settings() {
   const dispatch = useDispatch();
 
   const initialUserData = { ...userDetails };
-  delete initialUserData.role;
   delete initialUserData.hash;
   delete initialUserData.message;
+  delete initialUserData.role;
 
   const [userData, setUserData] = useState(initialUserData);
 

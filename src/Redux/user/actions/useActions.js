@@ -51,7 +51,6 @@ export const postSignUp = (
     dispatch(setLoadingSpinner(true));
     return new Promise(async (resolve, reject) => {
       try {
-        dispatch(setLoading(true));
         const res = await axios.post(API_ENDPOINT + "/adduser", {
           email,
           firstname,
@@ -75,7 +74,6 @@ export const postSignUp = (
           reject(new Error(err.response.data.message || "Error signing up"));
         }
       } finally {
-        dispatch(setLoading(false));
         dispatch(setLoadingSpinner(false));
       }
     });
@@ -87,7 +85,6 @@ export const postLogin = (email, password) => {
     dispatch(setLoadingSpinner(true));
     return new Promise(async (resolve, reject) => {
       try {
-        dispatch(setLoading(true));
         const res = await axios.post(API_ENDPOINT + "/auth", {
           email,
           password,
@@ -101,7 +98,6 @@ export const postLogin = (email, password) => {
           reject(new Error(err?.response?.data));
         }
       } finally {
-        dispatch(setLoading(false));
         dispatch(setLoadingSpinner(false));
       }
     });
@@ -128,6 +124,7 @@ export const updateUser = (user) => {
     return new Promise(async (resolve, reject) => {
       try {
         const res = await axios.put(API_ENDPOINT + "/changes", user);
+        console.log(res.data);
         dispatch(setAuth({ ...user }));
         resolve();
       } catch (err) {

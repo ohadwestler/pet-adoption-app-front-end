@@ -21,6 +21,7 @@ const initialPetData = {
 export default function AddPet() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const handleSubmit = async (petData) => {
     const formData = new FormData();
     Object.entries(petData).forEach(([key, value]) => {

@@ -46,7 +46,7 @@ export const processPet = (petId, operation) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await axios.post(
+      await axios.post(
         API_ENDPOINT + `/pet/${petId}/${operation}`
       );
       dispatch(updateRender(operation, petId));
@@ -62,7 +62,7 @@ export const processPetDelete = (petId, operation) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await axios.delete(
+      await axios.delete(
         API_ENDPOINT + `/pet/${petId}/${operation}`
       );
       dispatch(updateRender("unsave", petId));
@@ -126,11 +126,12 @@ export const getAllPets = () => {
   };
 };
 
-export const postPet = async (pet) => {
+export const postPet = (pet) => {
   return async (dispatch) => {
+    console.log('postPet');
     dispatch(setLoading(true));
     try {
-      const res = await axios.post(API_ENDPOINT + `/pets`, pet);
+      await axios.post(API_ENDPOINT + `/pets`, pet);
     } catch (err) {
       if (err.response.data[0]) {
         alert(
@@ -148,11 +149,12 @@ export const postPet = async (pet) => {
   };
 };
 
-export const updatePet = async (pet, id) => {
+
+export const updatePet = (pet, id) => {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const res = await axios.put(API_ENDPOINT + `/updatePet/${id}`, pet);
+      await axios.put(API_ENDPOINT + `/updatePet/${id}`, pet);
     } catch (err) {
       if (err.response.data[0]) {
         alert(
@@ -170,7 +172,7 @@ export const updatePet = async (pet, id) => {
   };
 };
 
-export const deletePet = async (id) => {
+export const deletePet = (id) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {

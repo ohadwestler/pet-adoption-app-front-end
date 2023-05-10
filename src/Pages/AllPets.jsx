@@ -26,7 +26,7 @@ function PetList({ pets }) {
             index={index}
             smallCard={true}
             otherButtons={
-              <div className="d-flex justify-content-lg-evenly mt-2">
+              <div className="d-flex justify-content-around">
                 <Button onClick={() => updatePet(pet)}>Edit</Button>
                 <Button onClick={() => showMore(pet)}>Show More</Button>
               </div>

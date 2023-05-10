@@ -9,7 +9,7 @@ function FormUserData({ userData, setUserData, type }) {
     lastName,
     confirmPasswad,
     phone,
-    bio,
+    bio = '',
   } = userData;
 
   const handleChange = (e) => {
@@ -92,7 +92,7 @@ function FormUserData({ userData, setUserData, type }) {
           </Form.Group>
           {type === "update" && (
             <Form.Group controlId="formGridAddress222" className="mb-3">
-              <Form.Label>Bio</Form.Label>
+              <Form.Label>Bio (optional)</Form.Label>
               <Form.Control
                 onChange={handleChange}
                 name="bio"

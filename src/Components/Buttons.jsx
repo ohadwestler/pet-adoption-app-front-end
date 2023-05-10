@@ -10,7 +10,6 @@ import { Button } from "react-bootstrap";
 export default function Buttons({ pet, dataOfUser }) {
   const { savedPets } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
-
   const petActions = {
     adopt: () => dispatch(processPet(pet.petsId, "adopt")),
     return: () => dispatch(processPet(pet.petsId, "return")),
@@ -27,7 +26,7 @@ export default function Buttons({ pet, dataOfUser }) {
   return (
     <div className="buttonsOfShowPet">
       <>
-        {savedPets.find((val) => val.petsId == pet.petsId) != null ? (
+        {savedPets.find((val) => val?.petsId == pet?.petsId) != null ? (
           <div className="d-flex justify-content-around">
             <Button
               className="btn btn-danger"

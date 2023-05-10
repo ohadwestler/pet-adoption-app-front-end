@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Spinner, Col, Row, Button, Alert } from "react-bootstrap";
+import { Form, Col, Row, Button, Alert } from "react-bootstrap";
 import { deletePet } from "../Redux/pets/actions/useActions";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -10,7 +10,6 @@ function PetForm({
   handleSubmit,
   validated,
   error,
-  spinner,
 }) {
   const {
     name,
@@ -122,9 +121,6 @@ function PetForm({
             <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
           </Form.Group>
         </Row>
-        <div className="d-flex justify-content-center">
-          <Spinner animation={spinner} variant="secondary" />
-        </div>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom003">
             <Form.Label>Adoption Status </Form.Label>
